@@ -29,12 +29,18 @@ app.use('/api/v1/categories', require('./routes/categories'))
 app.use('/api/v1/roles', require('./routes/roles'))
 app.use('/api/v1/upload', require('./routes/upload'))
 app.use('/api/v1/messages', require('./routes/messages'))
-mongoose.connect('mongodb://localhost:27017/nnptud-c5');
+mongoose.connect('mongodb://localhost:27017/NNPTUD-C5');
 mongoose.connection.on('connected', function () {
-  console.log("connected");
+  console.log("-----------------------------------------");
+  console.log("MongoDB connected successfully to localhost:27017");
+  console.log("Server running on http://localhost:3000");
+  console.log("-----------------------------------------");
 })
-mongoose.connection.on('disconnecting', function () {
-  console.log("disconnected");
+mongoose.connection.on('error', function (err) {
+  console.log("MongoDB connection error: " + err);
+})
+mongoose.connection.on('disconnected', function () {
+  console.log("MongoDB disconnected");
 })
 
 // catch 404 and forward to error handler
